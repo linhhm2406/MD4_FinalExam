@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="city/showListCity::staticFile"></div>
+</head>
+<body>
+<div class="container">
+    <th:block th:object="${city}">
+    <h3>Chỉnh sửa thành phố <span th:text="*{cityName}"></span></h3>
+    <form method="post">
+        <input type="hidden" th:field="*{id}">
+        <table>
+            <tr>
+                <td style="width: 100px">Tên</td>
+                <td><input style="width: 500px;" type="text" th:field="*{cityName}"></td>
+            </tr>
+            <tr>
+                <td>Quốc Gia</td>
+                <td>
+                    <select name="country">
+                        <option th:each="count : ${countryList}"
+                                th:value="${count.id}"
+                                th:text="${count.countryName}"
+                        th:selected="${city.country.id} == ${count.id}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Diện tích</td>
+                <td><input style="width: 500px;" type="text" th:field="*{area}"></td>
+            </tr>
+            <tr>
+                <td>Dân số</td>
+                <td><input style="width: 500px;" type="text" th:field="*{population}"></td>
+            </tr>
+            <tr>
+                <td>GDP</td>
+                <td><input style="width: 500px;" type="text" th:field="*{gdp}"></td>
+            </tr>
+            <tr>
+                <td>Giới thiệu</td>
+                <td><textarea name="des" cols="70" rows="10" th:field="*{des}"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align: center"><input class="btn btn-outline-dark" type="submit" value="Nhập thành phố">
+                    <a class="btn btn-outline-dark" th:href="@{/}">Thoát</a></td>
+            </tr>
+        </table>
+    </form>
+    </th:block>
+</div>
+</body>
+</html>
